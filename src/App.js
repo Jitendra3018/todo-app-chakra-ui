@@ -1,6 +1,6 @@
-import { Heading, IconButton, VStack } from "@chakra-ui/react";
+import { Heading, IconButton, useColorMode, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { FaSun } from "react-icons/fa";
+import { FaMoon, FaSun } from "react-icons/fa";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 
@@ -24,15 +24,17 @@ function App() {
 		setTodos([...todos, todo]);
 	};
 
+	const { colorMode, toggleColorMode } = useColorMode();
+
 	return (
 		// In this, when we pass any number from 1 to 64 then in this 1 = 4px, so here as we are passing 4, so the padding is 4*4px = 16px
 		<VStack p={4}>
 			<IconButton
-				icon={<FaSun />}
+				icon={colorMode === "light" ? <FaSun /> : <FaMoon />}
 				isRound="true"
 				size="lg"
 				alignSelf="flex-end"
-				// mb="4"
+				onClick={toggleColorMode}
 			/>
 			<Heading
 				mb="8"
